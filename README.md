@@ -55,6 +55,14 @@ sudo apt-get update
 sudo apt-get install git
 ```
 
+##### Install Kafka
+I installed the kafka binaries from https://www.digitalocean.com/community/tutorials/how-to-install-apache-kafka-on-ubuntu-18-04 and processed them. This allowed me to manage the full configuration of the build.
+
+```shell
+curl "https://www.apache.org/dist/kafka/2.1.1/kafka_2.11-2.1.1.tgz" -o ~/Starlizard/compose-pipeline/kafka
+tar -xvzf kafka.tgz --strip 1
+```
+
 ---
 
 ### Build
