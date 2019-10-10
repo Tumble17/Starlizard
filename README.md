@@ -1,7 +1,8 @@
 # Starlizard
 Temporary repo for Starlizard interview process
-
+---
 ### Setup
+#### Installs
 ##### Install Docker Engine
 I installed using the convenience script found at: https://docs.docker.com/install/linux/docker-ce/debian/#install-using-the-convenience-script.
 
@@ -21,10 +22,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 
 ##### Install pip3
-I installed pip3 so that I could install virtual environments for development of the separate pipeline components, before passing them to the services within the Docker Compose. https://askubuntu.com/questions/778052/installing-pip3-for-python3-on-ubuntu-16-04-lts-using-a-proxy
+I installed pip3 so that I could install virtual environments for development of the separate pipeline components, before passing them to the services within the Docker Compose. https://askubuntu.com/questions/778052/installing-pip3-for-python3-on-ubuntu-16-04-lts-using-a-proxy. I also pip3 installed virtualenv but did not include this in the requirements file as it's external to the container build.
     
 ```shell
 sudo apt-get update   
 sudo apt-get -y install python3-pip
-```
-
+``` 
+---
