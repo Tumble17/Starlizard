@@ -1,5 +1,14 @@
 # Starlizard
-Temporary repo for Starlizard interview process
+A temporary repository for interview purposes only. This repo walks through the steps taken to build a pipeline that comprises of a producer, a kafka broker and a consumer. The spec explicitly asks for Docker Compose as the method of orchestration, alongside Python 3+ and Docker Compose 1.17+.
+
+This README is made up of the following sections:
+1. Setup
+   
+   a. Installs
+
+2. Feedback
+
+
 ---
 ### Setup
 #### Installs
@@ -37,3 +46,20 @@ python3 -m venv pipeline-producer
 . virtualenvs/pipeline-producer/bin/activate
 ```
 I then use the infamous and lazy trick of saving the developed environment down into the requirements.txt file once happy, using `pip3 freeze > requirements.txt`.
+
+---
+
+### Build
+
+##### Producer
+I used Python, so leant on the KafkaProducer module to keep things simple. The generation of random numbers is fairly simple in this illustrative example, as I just use `random.randint` for the three digit numbers and `random.uniform` for the decimal placed numerics. 
+
+**NOTE 1** 
+Generation of a dictionary and JSON (Python 3.5) is under the CPython implementation, so the schema of:
+```javascript
+{
+  "match" : v1,
+  "price" : v2
+}
+```
+could be lost by the lack of order preservation. This is returned for 3.6+. See: [https://stackoverflow.com/questions/1867861/how-to-keep-keys-values-in-same-order-as-declared] and [https://stackoverflow.com/questions/10844064/items-in-json-object-are-out-of-order-using-json-dumps]. Therefore I opted for a `collections.OrderedDict` implementation.
