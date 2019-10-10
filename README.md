@@ -63,6 +63,13 @@ curl "https://www.apache.org/dist/kafka/2.1.1/kafka_2.11-2.1.1.tgz" -o ~/Starliz
 tar -xvzf kafka.tgz --strip 1
 ```
 
+##### Install Java 8 JDK
+The kafka build relies on Java 8 so I installed from https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk.
+
+```shell
+sudo apt install openjdk-8-jdk
+```
+
 ---
 
 ### Build
