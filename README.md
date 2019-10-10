@@ -22,10 +22,18 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 
 ##### Install pip3
-I installed pip3 so that I could install virtual environments for development of the separate pipeline components, before passing them to the services within the Docker Compose. https://askubuntu.com/questions/778052/installing-pip3-for-python3-on-ubuntu-16-04-lts-using-a-proxy. I also pip3 installed virtualenv but did not include this in the requirements file as it's external to the container build.
-    
+I installed pip3 so that I could install virtual environments (with Python 3+) for development of the separate pipeline components, before passing them to the services within the Docker Compose. https://askubuntu.com/questions/778052/installing-pip3-for-python3-on-ubuntu-16-04-lts-using-a-proxy.
+
 ```shell
 sudo apt-get update   
 sudo apt-get -y install python3-pip
 ``` 
----
+
+I also installed virtualenv but did not include this in the requirements file as it's external to the container build.
+
+```shell
+sudo apt-get install python3-venv
+python3 -m venv pipeline-producer
+. virtualenvs/pipeline-producer/bin/activate
+```
+I then use the infamous and lazy trick of saving the developed environment down into the requirements.txt file once happy, using `pip3 freeze > requirements.txt`.
