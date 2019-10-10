@@ -47,6 +47,14 @@ python3 -m venv pipeline-producer
 ```
 I then use the infamous and lazy trick of saving the developed environment down into the requirements.txt file once happy, using `pip3 freeze > requirements.txt`.
 
+##### Install git
+I installed git in order to manage this repo on the raw development linux instance that I was using. https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git
+
+```shell
+sudo apt-get update
+sudo apt-get install git
+```
+
 ---
 
 ### Build
