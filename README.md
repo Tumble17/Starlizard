@@ -86,3 +86,26 @@ Generation of a dictionary and JSON (Python 3.5) is under the CPython implementa
 }
 ```
 could be lost by the lack of order preservation. This is returned for 3.6+. See: [https://stackoverflow.com/questions/1867861/how-to-keep-keys-values-in-same-order-as-declared] and [https://stackoverflow.com/questions/10844064/items-in-json-object-are-out-of-order-using-json-dumps]. Therefore I opted for a `collections.OrderedDict` implementation.
+
+##### Broker
+I started the zookeeper server, which manages the kafka broker(s).
+```shell
+sudo bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+
+I started the kafka broker server up
+```shell
+/home/kafka/kafka/bin/kafka-server-start.sh /home/kafka/kafka/config/server.properties
+```
+
+I created a new topic under the specified name of 'prices-topic', with simple settings
+```shell
+/home/kafka/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic prices-topic
+```
+
+I verified that the new topic was now available
+```shell
+/home/kafka/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+```
+
+
