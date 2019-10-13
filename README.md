@@ -87,6 +87,10 @@ Generation of a dictionary and JSON (Python 3.5) is under the CPython implementa
 ```
 could be lost by the lack of order preservation. This is returned for 3.6+. See: [https://stackoverflow.com/questions/1867861/how-to-keep-keys-values-in-same-order-as-declared] and [https://stackoverflow.com/questions/10844064/items-in-json-object-are-out-of-order-using-json-dumps]. Therefore I opted for a `collections.OrderedDict` implementation.
 
+We need to serialize our output from dict to bytes and can use the KafkaProducer `value_serializer` parameter to convert whilst passing our JSON objects.
+
+
+
 ##### Broker
 I started the zookeeper server, which manages the kafka broker(s).
 ```shell
