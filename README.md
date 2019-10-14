@@ -112,4 +112,5 @@ I verified that the new topic was now available
 /home/kafka/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
 ```
 
-
+##### Consumer
+I wrote a bespoke consumer, that connects to the Kafka cluster via the nominated server location and ports. I made sure to decode the messages that had been encoded using 'utf-8'.

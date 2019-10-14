@@ -47,6 +47,9 @@ def collect_optional_command_arguments(passed_args):
     | -----
     |
     """
+    # Reference globals
+    global KAFKA_TOPIC_NAME, KAFKA_BROKER_LOCATION
+
     # Kafka topic reference name
     if not passed_args.topic_name == None:
         print("Overwriting global kafka topic name from " + KAFKA_TOPIC_NAME + " to " + passed_args.topic_name)
@@ -82,7 +85,7 @@ def connect_kafka_producer(server_locations_list):
 
     return producer
 
-def produce_json_randomised_values(test_loop_count=1000, kafka_topic):
+def produce_json_randomised_values(kafka_topic, test_loop_count=1000):
     """
     |
     | Generate the randomised outputs of the specific JSON object schema
@@ -99,6 +102,12 @@ def produce_json_randomised_values(test_loop_count=1000, kafka_topic):
     | -----
     |
     """
+    # Reference globals
+    global KAFKA_BROKER_LOCATIONS, WHILE_LOOP_INDEX, GLOBAL_SEED, TEST_MODE
+
+    # Connect to broker(s)
+    producer = connect_kafka_producer(server_locations_list=KAFKA_BROKER_LOCATIONS)
+
     # Loop
     while WHILE_LOOP_INDEX < test_loop_count:
 
@@ -116,7 +125,7 @@ def produce_json_randomised_values(test_loop_count=1000, kafka_topic):
         json_message = json.dumps(OrderedDict([("match", random_three_digit_match), ("price", random_price)]))
 
         # Attempt to send message to the Kafka topic
-        producer.send(kakfa_topic, json_message)
+        producer.send(kafka_topic, json_message)
 
         if TEST_MODE:
             # Moves the counter on, to move loop to completion
@@ -126,7 +135,7 @@ def produce_json_randomised_values(test_loop_count=1000, kafka_topic):
 # =============================================
 #               PROCESS
 # =============================================
-if __name__ == "__main__":
+def process():
 
     # Overwrite globals with command arguments where passed
     collect_optional_command_arguments(passed_args=parser_args)
@@ -136,3 +145,5 @@ if __name__ == "__main__":
 
     # Generate JSON outputs and publish to Kafka cluster
     produce_json_randomised_values(kafka_topic=KAFKA_TOPIC_NAME)
+
+process()

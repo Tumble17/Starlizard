@@ -44,6 +44,9 @@ def collect_optional_command_arguments(passed_args):
     | -----
     |
     """
+    # Reference globals
+    global KAFKA_TOPIC_NAME, KAFKA_BROKER_LOCATION, KAFKA_FROM_START
+    
     # Kafka topic reference name
     if not passed_args.topic_name == None:
         print("Overwriting global kafka topic name from " + KAFKA_TOPIC_NAME + " to " + passed_args.topic_name)
@@ -59,7 +62,7 @@ def collect_optional_command_arguments(passed_args):
         print("Overwriting global listener history toggle from " + KAFKA_FROM_START + " to " + passed_args.from_start)
         KAFKA_FROM_START = passed_args.from_start
 
-def consume_topic(kafka_topic, server_locations_list):
+def consume_topic(kafka_topic, server_locations_list, from_start):
     """
     |
     | Consume messages from a Kafka topic
@@ -68,6 +71,7 @@ def consume_topic(kafka_topic, server_locations_list):
     | ----------
     | kafka_topic : str - Name of the existing Kafka topic to consume
     | server_locations_list : list - List of the kafka brokers to point to and consume from
+    | from_start : str - Whether to pull from history or now (latest / earliest)
     |
     | Returns
     | -------
@@ -77,11 +81,16 @@ def consume_topic(kafka_topic, server_locations_list):
     | -----
     |
     """
+    # Parse the from_start parameter
+    from_start_parsed = from_start
+    if not from_start == 'earliest':
+        from_start_parsed = 'latest'
+
     # Set up consumer connection
     consumer = kafka.KafkaConsumer(kafka_topic,
-            bootstrap_servers=server_locations_list)
-            #auto_offset_reset='earliest')
-    print("Set up connection to " + kafka_topic + " topic at " + server_locations_list)
+            bootstrap_servers=server_locations_list,
+            auto_offset_reset=from_start_parsed)
+    print("Set up connection to " + kafka_topic + " topic at " + str(server_locations_list))
 
     while not TEST_MODE:
 
@@ -89,9 +98,11 @@ def consume_topic(kafka_topic, server_locations_list):
         for message in consumer:
             print(message.value.decode('utf-8'))
 
-if __name__ == "__main__":
+def process():
     # Overwrite globals with command arguments where passed
     collect_optional_command_arguments(passed_args=parser_args)
 
     # Connecto Kafka broker and listen to the topic passed by name
-    consume_topic(kafka_topic=KAFKA_TOPIC_NAME, server_locations_list=KAFKA_BROKER_LOCATIONS)
+    consume_topic(kafka_topic=KAFKA_TOPIC_NAME, server_locations_list=KAFKA_BROKER_LOCATIONS, from_start=KAFKA_FROM_START)
+
+process()
