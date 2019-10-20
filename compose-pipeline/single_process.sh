@@ -4,8 +4,6 @@ set -m
 
 echo "SINGLE PROCESS STARTED"
 
-. ./broker/zookeeper_process.sh &
-
 . ./broker/broker_process.sh &
 
 #. ./producer/producer_process.sh &
