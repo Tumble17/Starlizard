@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PROCESS = "KAFKA BROKER PROCESS"
-KAFKA_LOCATION = /home/kafka/kafka
+export PROCESS = "KAFKA BROKER PROCESS"
+export KAFKA_LOCATION = /home/kafka/kafka
 
 echo "$PROCESS: Starting process"
 
@@ -14,4 +14,4 @@ sudo $KAFKA_LOCATION/bin/kafka-topics.sh --create --zookeeper localhost:2181 --r
 echo "$PROCESS: Verifying new topic available"
 sudo $KAFKA_LOCATION/bin/kafka-topics.sh --list --zookeeper localhost:2181
 
-echo "$PROCESS: Complete"
+echo "$PROCESS: Completed process"

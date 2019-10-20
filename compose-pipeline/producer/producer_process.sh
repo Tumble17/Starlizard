@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "PRODUCER PROCESS"
+PROCESS = "PRODUCER PROCESS"

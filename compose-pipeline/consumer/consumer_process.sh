@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "CONSUMER PROCESS"
+PROCESS = "CONSUMER PROCESS"
