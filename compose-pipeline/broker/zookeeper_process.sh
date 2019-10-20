@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export PROCESS = "ZOOKEEPER PROCESS"
-export KAFKA_LOCATION = /home/kafka/kafka
+export PROCESS="ZOOKEEPER PROCESS"
+export KAFKA_LOCATION=/home/kafka/kafka
 
 echo "$PROCESS: Starting process"
 
