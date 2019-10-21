@@ -46,7 +46,7 @@ def collect_optional_command_arguments(passed_args):
     """
     # Reference globals
     global KAFKA_TOPIC_NAME, KAFKA_BROKER_LOCATION, KAFKA_FROM_START
-    
+
     # Kafka topic reference name
     if not passed_args.topic_name == None:
         print("Overwriting global kafka topic name from " + KAFKA_TOPIC_NAME + " to " + passed_args.topic_name)
@@ -98,6 +98,9 @@ def consume_topic(kafka_topic, server_locations_list, from_start):
         for message in consumer:
             print(message.value.decode('utf-8'))
 
+# =============================================
+#                  PROCESS
+# =============================================
 def process():
     # Overwrite globals with command arguments where passed
     collect_optional_command_arguments(passed_args=parser_args)
