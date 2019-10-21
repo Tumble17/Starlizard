@@ -9,23 +9,33 @@ echo "$PROCESS: Changing directory to kafka home location"
 cd $KAFKA_HOME_LOCATION
 
 echo "$PROCESS: Stopping lingering zookeeper server"
-# . kafka/bin/zookeeper-server-stop.sh || echo "$PROCESS: No zookeeper server to stop"
+kafka/bin/zookeeper-server-stop.sh || echo "$PROCESS: No zookeeper server to stop" &
+
+# Assign the current process
+process_stop_zookeeper=$!
+# Wait for the step to complete
+wait $process_stop_zookeeper
 
 echo "$PROCESS: Starting fresh zookeeper server"
-sudo . kafka/bin/zookeeper-server-start.sh kafka/config/zookeeper.properties &
+/usr/bin/sudo kafka/bin/zookeeper-server-start.sh kafka/config/zookeeper.properties &
+
+# Assign the current process
+process_start_zookeeper=$!
+# Wait for the step to complete
+wait $process_start_zookeeper
 
 echo "$PROCESS: Starting Kafka server"
-. kafka/bin/kafka-server-start.sh kafka/config/server.properties &
+kafka/bin/kafka-server-start.sh kafka/config/server.properties &
 
 echo "$PROCESS: Creating topic"
-. kafka/bin/kafka-topics.sh --create \
+kafka/bin/kafka-topics.sh --create \
 	--zookeeper localhost:2181 \
 	--replication-factor 1 \
 	--partitions 1 \
 	--topic prices-topic
 
 echo "$PROCESS: Verifying new topic available"
-. kafka/bin/kafka-topics.sh --list \
+kafka/bin/kafka-topics.sh --list \
 	--zookeeper localhost:2181
 
 echo "$PROCESS: Completed process"
