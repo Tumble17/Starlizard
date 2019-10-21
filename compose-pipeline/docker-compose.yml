@@ -1,22 +1,19 @@
 version: '3'
 services:
+        broker:
+                build:
+                        context: ./
+                        dockerfile: Dockerfile
+                image: spotify/kafka
+        
         producer:
                 build:
                         context: ./producer
-                        dockerfile: Dockerfile-producer
-                image:
-                        kafka-producer:jd
-        
-        broker:
-                build:
-                        context: ./broker
-                        dockerfile: Dockerfile-broker
-                image:
-                        kafka-broker:jd
-
+                        dockerfile: Dockerfile
+                        image: tumble-kafka:producer
+              
         consumer:
                 build:
                         context: ./consumer
-                        dockerfile: Dockerfile-consumer
-                image:
-                        kafka-consumer:jd
+                        dockerfile: Dockerfile
+                        image: tumble-kafka:consumer

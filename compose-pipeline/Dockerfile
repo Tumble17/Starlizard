@@ -1,2 +1,2 @@
 FROM spotfy/kafka
-RUN echo ls ~/
+RUN echo "WAITED" 
