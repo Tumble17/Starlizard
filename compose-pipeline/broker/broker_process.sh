@@ -5,8 +5,16 @@ export KAFKA_HOME_LOCATION=/home/kafka
 
 echo "$PROCESS: Starting process"
 
-echo "$PROCESS: Changing directory to kafka home location"
+echo "$PROCESS: Changing directory to Kafka home location"
 cd $KAFKA_HOME_LOCATION
+
+echo "$PROCESS: Stopping lingering Kafka server"
+kafka/bin/kafka-server-stop.sh || echo "$PROCESS: No Kafka server to stop" &
+
+# Assign current process
+process_stop_kafka=$!
+# Wait for the step to complete
+wait $process_stop_kafka
 
 echo "$PROCESS: Stopping lingering zookeeper server"
 kafka/bin/zookeeper-server-stop.sh || echo "$PROCESS: No zookeeper server to stop" &

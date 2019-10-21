@@ -13,10 +13,8 @@ wait $process_broker
 
 . ./producer/producer_process.sh &
 
-# Assign the current process
-process_producer=$!
-# Wait for the producer to load
-wait $process_producer
+# Don't need to wait for process, start loading consumer whilst producer loads in background
+echo "LOADING CONSUMER"
 
 . ./consumer/consumer_process.sh
 
