@@ -25,7 +25,7 @@ GLOBAL_SEED  = 42
 SEEDING_FLAG = False
 TEST_MODE = False
 KAFKA_TOPIC_NAME = 'prices-topic'
-KAFKA_BROKER_LOCATIONS = ['broker:9092']
+KAFKA_BROKER_LOCATIONS = ['localhost:9092']
 
 # =============================================
 #               FUNCTIONS

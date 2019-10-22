@@ -8,17 +8,3 @@ services:
                 ports:
                  - "2181:2181"
                  - "9092:9092"
-        producer:
-                build:
-                        context: ./producer
-                        dockerfile: Dockerfile
-                image: tumble-kafka:producer
-                depends_on: 
-                 - kafka
-        consumer:
-                build:
-                        context: ./consumer
-                        dockerfile: Dockerfile
-                image: tumble-kafka:consumer
-                depends_on: 
-                 - kafka
