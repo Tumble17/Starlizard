@@ -13,6 +13,9 @@ This README is made up of the following sections:
 
 ---
 ### Setup
+
+This setup outlines the steps I went through to create a container with the required software for the development of the build. Docker negates this need at production. I also wanted to get into the lowest granularity of the setup before abstracting to Docker Compose and Dockerfile code. This therefore assumes these steps have taken place or are not required in the way that the user works with the end Docker Compose build of the code repo.
+
 #### Installs
 ##### Install Docker Engine
 I installed using the convenience script found at: https://docs.docker.com/install/linux/docker-ce/debian/#install-using-the-convenience-script.
@@ -56,6 +59,9 @@ I installed git in order to manage this repo on the raw development linux instan
 sudo apt-get update
 sudo apt-get install git
 ```
+
+##### Clone Repo
+`git clone https://github.com/Tumble17/Starlizard.git` drops the repo into the working directory.
 
 ##### Install Kafka
 I installed the kafka binaries from https://www.digitalocean.com/community/tutorials/how-to-install-apache-kafka-on-ubuntu-18-04 and processed them. This allowed me to manage the full configuration of the build.
@@ -152,10 +158,14 @@ cp /home/kafka/kafka/config/server.properties config/server.properties
 ```
 
 ##### Use
+Running `docker-compose up` (sudo dependent on your build) will be enough to orchestrate the build of the cloned repo and create the pipeline, printing JSON values to screen.
+
+Subsequent builds unfortunately require `docker build --no-cache` as the Kafka server gets confused on reset in the current implementation.
 
 
 ### Future Work
 Multiple services structure in Docker Compose rather than single service multiple process build
+Separate images for different uses as the python3 installations take ages...
 Multiple Kafka nodes
 Failover / Recovery of cluster testing
 Full cache flush forced
