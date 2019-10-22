@@ -27,13 +27,15 @@ wait $process_stop_zookeeper
 echo "$PROCESS: Starting fresh zookeeper server"
 bin/zookeeper-server-start.sh config/zookeeper.properties &
 
-# Assign the current process
-process_start_zookeeper=$!
-# Wait for the step to complete
-wait $process_start_zookeeper
+# Wait 5 seconds for the zookeeper to start up
+echo "$PROCESS: Waiting 5 seconds for zookeeper"
+sleep 5
 
 echo "$PROCESS: Starting Kafka server"
 bin/kafka-server-start.sh config/server.properties &
+
+echo "$PROCESS: Waiting 5 seconds for Kafka"
+sleep 5
 
 echo "$PROCESS: Creating topic"
 bin/kafka-topics.sh --create \
