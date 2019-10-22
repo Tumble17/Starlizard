@@ -114,3 +114,14 @@ I verified that the new topic was now available
 
 ##### Consumer
 I wrote a bespoke consumer, that connects to the Kafka cluster via the nominated server location and ports. I made sure to decode the messages that had been encoded using 'utf-8'.
+
+### Docker Compose
+##### Folder layout
+
+##### Prep
+
+##### Build
+```shell
+cp /home/kafka/kafka/config/zookeeper.properties config/zookeeper.properties
+cp /home/kafka/kafka/config/server.properties config/server.properties
+```
