@@ -6,7 +6,9 @@ This README is made up of the following sections:
    
    a. Installs
 
-2. Feedback
+2. Docker Compose
+
+3. Future Work
 
 
 ---
@@ -113,15 +115,49 @@ I verified that the new topic was now available
 ```
 
 ##### Consumer
-I wrote a bespoke consumer, that connects to the Kafka cluster via the nominated server location and ports. I made sure to decode the messages that had been encoded using 'utf-8'.
+I wrote a bespoke consumer, that connects to the Kafka cluster via the nominated server location and ports. I made sure to decode the messages that had been encoded using 'utf-8'. The consumer outputs to the console as specified.
 
 ### Docker Compose
 ##### Folder layout
+Starlizard
+   + compose-pipeline
+      + config
+         + zookeeper.properties
+         + server.properties
+      + broker
+         + broker_process.sh
+      + producer
+         + producer_process.sh
+         + json_producer.py
+      + consumer
+         + consumer_process.sh
+         + kafka_consumer.py
+      docker-compose.yml
+      Dockerfile
+      requirements.txt
+      single_process.sh
+   + README.md
 
 ##### Prep
+For ease of build, I moved my single_process.sh and broker_process.sh architecture into the Docker Compose YAML. This builds a single service with multiple process orchestration. This moves us from development into a container 'production' version fairly quickly so was satisfactory for this task.
+
+I used the `spotify/kafka:latest` image as suggested and added pip3 to the installation to also accomodate the producer and consumer builds. 
 
 ##### Build
+Server properties could be changed in the future, so to allow for this I have copied across my properties files into the build.
+
 ```shell
 cp /home/kafka/kafka/config/zookeeper.properties config/zookeeper.properties
 cp /home/kafka/kafka/config/server.properties config/server.properties
 ```
+
+##### Use
+
+
+### Future Work
+Multiple services structure in Docker Compose rather than single service multiple process build
+Multiple Kafka nodes
+Failover / Recovery of cluster testing
+Full cache flush forced
+Code refactoring (dependent on amount of potential future use)
+
