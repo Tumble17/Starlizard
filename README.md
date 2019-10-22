@@ -160,7 +160,7 @@ cp /home/kafka/kafka/config/server.properties config/server.properties
 ##### Use
 Running `docker-compose up` (sudo dependent on your build) will be enough to orchestrate the build of the cloned repo and create the pipeline, printing JSON values to screen.
 
-Subsequent builds unfortunately require `docker build --no-cache` as the Kafka server gets confused on reset in the current implementation.
+Subsequent builds unfortunately require `docker-compose build --no-cache` as the Kafka server gets confused on reset in the current implementation.
 
 
 ### Future Work
