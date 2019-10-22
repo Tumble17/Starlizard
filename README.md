@@ -45,7 +45,7 @@ I also installed virtualenv but did not include this in the requirements file as
 ```shell
 sudo apt-get install python3-venv
 python3 -m venv pipeline-producer
-. virtualenvs/pipeline-producer/bin/activate
+. pipeline-producer/bin/activate
 ```
 I then use the infamous and lazy trick of saving the developed environment down into the requirements.txt file once happy, using `pip3 freeze > requirements.txt`.
 
