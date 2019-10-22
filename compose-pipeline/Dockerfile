@@ -1,2 +1,4 @@
-FROM spotfy/kafka
-RUN echo "WAITED" 
+FROM spotify/kafka:latest
+USER root
+COPY . .
+RUN bash single_process.sh

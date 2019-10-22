@@ -1,21 +1,24 @@
 version: '3'
 services:
-        broker:
+        kafka:
                 build:
-                        context: ./broker
+                        context: ./
                         dockerfile: Dockerfile
                 image: tumble-kafka:broker
+                ports:
+                 - "2181:2181"
+                 - "9092:9092"
         producer:
                 build:
                         context: ./producer
                         dockerfile: Dockerfile
                 image: tumble-kafka:producer
                 depends_on: 
-                 - broker
+                 - kafka
         consumer:
                 build:
                         context: ./consumer
                         dockerfile: Dockerfile
                 image: tumble-kafka:consumer
                 depends_on: 
-                 - broker
+                 - kafka
