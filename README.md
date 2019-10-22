@@ -138,10 +138,10 @@ Starlizard
       + consumer
          + consumer_process.sh
          + kafka_consumer.py
-      docker-compose.yml
-      Dockerfile
-      requirements.txt
-      single_process.sh
+      + docker-compose.yml
+      + Dockerfile
+      + requirements.txt
+      + single_process.sh
    + README.md
 
 ##### Prep
@@ -164,10 +164,10 @@ Subsequent builds unfortunately require `docker-compose build --no-cache` as the
 
 
 ### Future Work
-Multiple services structure in Docker Compose rather than single service multiple process build
-Separate images for different uses as the python3 installations take ages...
-Multiple Kafka nodes
-Failover / Recovery of cluster testing
-Full cache flush forced
-Code refactoring (dependent on amount of potential future use)
++ Multiple services structure in Docker Compose rather than single service multiple process build
++ Separate images for different uses as the python3 installations take ages...
++ Multiple Kafka nodes
++ Failover / Recovery of cluster testing
++ Full cache flush forced
++ Code refactoring (dependent on amount of potential future use)
 
