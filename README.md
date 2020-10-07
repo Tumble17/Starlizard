@@ -1,5 +1,5 @@
-# Starlizard
-A temporary repository for interview purposes only. This repo walks through the steps taken to build a pipeline that comprises of a producer, a kafka broker and a consumer. The spec explicitly asks for Docker Compose as the method of orchestration, alongside Python 3+ and Docker Compose 1.17+.
+# Kafkette
+A template repo for building a Kafka cluster from scratch. This repo walks through the steps taken to build a pipeline that comprises of a producer, a kafka broker and a consumer. The spec explicitly asks for Docker Compose as the method of orchestration, alongside Python 3+ and Docker Compose 1.17+.
 
 This README is made up of the following sections:
 1. Setup
